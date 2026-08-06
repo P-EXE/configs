@@ -10,6 +10,7 @@
         };
         extraLuaFiles = {
           "keybinds" = ./hyprland/keybinds.lua;
+          "startup" = ./hyprland/startup.lua;
         };
       };
     };
