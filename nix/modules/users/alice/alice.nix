@@ -4,7 +4,7 @@
       den.batteries.define-user
       den.batteries.primary-user
       (den.batteries.user-shell "fish")
-      #den.aspects.themes.archive
+      den.aspects.themes.archive
     ] ++ lib.attrValues den.aspects.alice._;
     homeManager = { pkgs, ... }: {
       home.packages = with pkgs; [
