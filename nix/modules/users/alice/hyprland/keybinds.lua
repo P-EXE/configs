@@ -22,6 +22,7 @@ hl.bind(mod .. " + Shift + Print", hl.dsp.exec_cmd("hyprshot -m output --clipboa
 hl.bind(mod .. " + Shift + Control + Print", hl.dsp.exec_cmd("hyprshot -m window --clipboard-only"))
 hl.bind(mod .. " + Equal", hl.dsp.exec_cmd("hyprctl keyword monitor \"eDP-1, preferred, auto, 1.5\""))
 hl.bind(mod .. " + Minus", hl.dsp.exec_cmd("hyprctl keyword monitor \"eDP-1, preferred, auto, 1\""))
+
 hl.bind(mod .. " + Return", hl.dsp.window.fullscreen())
 hl.bind(mod .. " + W", hl.dsp.window.float())
 hl.bind(mod .. " + Left", hl.dsp.window.movefocus, "l")
@@ -32,6 +33,7 @@ hl.bind(mod .. " + Shift + Left", hl.dsp.window.swapwindow, "l")
 hl.bind(mod .. " + Shift + Right", hl.dsp.window.swapwindow, "r")
 hl.bind(mod .. " + Shift + Up", hl.dsp.window.swapwindow, "u")
 hl.bind(mod .. " + Shift + Down", hl.dsp.window.swapwindow, "d")
+
 hl.bind(mod .. " + 1", hl.dsp.workspace, 1)
 hl.bind(mod .. " + 2", hl.dsp.workspace, 2)
 hl.bind(mod .. " + 3", hl.dsp.workspace, 3)
@@ -73,15 +75,13 @@ hl.gesture({
     action = "workspace"
 })
 
-          workspace = [
-            "1, default:true"
-            "2"
-            "3"
-            "4"
-            "5"
-            "6"
-            "7"
-            "8"
-            "9"
-            "10"
-          ];
+hl.workspace("1, default:true")
+hl.workspace("2")
+hl.workspace("3")
+hl.workspace("4")
+hl.workspace("5")
+hl.workspace("6")
+hl.workspace("7")
+hl.workspace("8")
+hl.workspace("9")
+hl.workspace("10")

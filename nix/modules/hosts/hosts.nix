@@ -35,6 +35,39 @@
     battery = {
     };
   };
+  den.hosts.x86_64-linux.whitebox = rec {
+    users.alice = {
+      wallpaperPath = "~/Pictures/Wallpapers/Clay Banks/Arizona/Wheat.jpg";
+    };
+    displays = [
+      {
+        name = "";
+        id = 0;
+        friendlyName = "LC49HG90DMRXEN";
+        resolution.x = 3840;
+        resolution.y = 1080;
+        size.x = 1196;
+        size.y = 336;
+        dpi = 82;
+        refreshRate = 144;
+        scale = 1;
+        pseudoScale = 1;
+        safeZones = {
+          tl.x = 24;
+          tl.y = 24;
+          tr.x = 24;
+          tr.y = 24;
+          br.x = 12;
+          br.y = 12;
+          bl.x = 12;
+          bl.y = 12;
+        };
+      }
+    ];
+    primaryDisplay = builtins.elemAt displays 0;
+    battery = {
+    };
+  };
 
   # define an standalone home-manager for tux
   # den.homes.x86_64-linux.alice = { };
