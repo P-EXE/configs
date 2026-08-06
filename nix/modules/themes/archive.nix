@@ -54,13 +54,20 @@
       ];
       wayland.windowManager.hyprland = {
         extraLuaFiles = {
-          "theme" = ''
+          "theme" = ./archive.lua;
+          "hyprbars" = ''
             hl.config({
-              general = {
-                layout = "dwindle"
-                border_size = 0
-                gaps_in = 0
-                gaps_out = 0
+              plugin = {
+                hyprbars = {
+                  enabled = true,
+                  bar_height = 18,
+                  bar_title_enabled = true,
+                  bar_text_size = ${builtins.toString(builtins.floor (10 * host.primaryDisplay.pseudoScale))},
+                  bar_text_font = "JetBrains Mono",
+                  bar_text_align = "left",
+                  bar_padding = 4,
+                  bar_color = "rgb(0, 0, 0)",
+                }
               }
             })
           '';
