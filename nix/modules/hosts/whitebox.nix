@@ -13,16 +13,16 @@
       # Blockdevices
       fileSystems = {
         "/" = {
-          device = "/dev/disk/by-uuid/a241aacd-e8d3-4c8e-a637-af296f5a2693";
+          device = "/dev/disk/by-uuid/f1b01f89-eb95-4ada-a3c4-2353e60f837f";
           fsType = "btrfs";
         };
         "/home" = {
-          device = "/dev/disk/by-uuid/a241aacd-e8d3-4c8e-a637-af296f5a2693";
+          device = "/dev/disk/by-uuid/f1b01f89-eb95-4ada-a3c4-2353e60f837f";
           fsType = "btrfs";
           options = [ "subvol=home" ];
         };
         "/nix" = {
-          device = "/dev/disk/by-uuid/a241aacd-e8d3-4c8e-a637-af296f5a2693";
+          device = "/dev/disk/by-uuid/f1b01f89-eb95-4ada-a3c4-2353e60f837f";
           fsType = "btrfs";
           options = [ "subvol=nix" ];
         };
@@ -77,6 +77,20 @@
       services.udisks2.enable = true;
 
       hardware.graphics.enable = true;
+      services.xserver.enable = true;
+      services.xserver.videoDrivers = ["nvidia"];
+      hardware.nvidia = {
+        modesetting.enable = true;
+        powerManagement.enable = false;
+        powerManagement.finegrained = false;
+        open = false;
+        nvidiaSettings = true;
+        package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
+      };
+      hardware.graphics.enable32Bit = true;
+      environment.sessionVariables = {
+        NO_HARDWARE_CURSORS = 1;
+      };
 
       networking = {
         hostName = "Whitebox";

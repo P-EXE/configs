@@ -201,6 +201,26 @@
         "type": "github"
       }
     },
+    "helium": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1786110425,
+        "narHash": "sha256-FhmkVjoDaUaEhpLQlgpD9uwIVZZqdXnLops6IyVpJk4=",
+        "owner": "P-EXE",
+        "repo": "helium",
+        "rev": "14c9b9e357430cc228bae6e087019d0abf8c69ae",
+        "type": "github"
+      },
+      "original": {
+        "owner": "P-EXE",
+        "repo": "helium",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -679,6 +699,7 @@
         "den": "den",
         "flake-file": "flake-file",
         "flake-parts": "flake-parts",
+        "helium": "helium",
         "home-manager": "home-manager",
         "hyprland": "hyprland",
         "hyprland-plugins": "hyprland-plugins",
