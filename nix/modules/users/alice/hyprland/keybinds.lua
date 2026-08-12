@@ -9,7 +9,7 @@ hl.config({
 })
 
 hl.bind(mod .. " + L", hl.dsp.exec_cmd("hyprlock"))
-hl.bind(mod .. " + DELETE", hl.dsp.exec_cmd("hyprshutdown"))
+hl.bind(mod .. " + DELETE", hl.dsp.exit())
 hl.bind(mod .. " + SHIFT + DELETE", hl.dsp.exec_cmd("systemctl shutdown -h now"))
 hl.bind(mod .. " + Q", hl.dsp.window.close())
 hl.bind(mod .. " + SPACE", hl.dsp.exec_cmd("pkill tofi-drun || tofi-drun --drun-launch=true"))

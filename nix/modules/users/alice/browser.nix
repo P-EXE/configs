@@ -1,5 +1,5 @@
 { den, inputs, ... }: {
-  flake-file = {
+	  flake-file = {
     inputs = {
       helium = {
         url = "github:P-EXE/helium";
@@ -18,6 +18,6 @@
 		};
 		home.packages = [
 			inputs.helium
-  	];
+		];
   };
 }

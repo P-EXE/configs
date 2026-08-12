@@ -11,6 +11,16 @@
         extraLuaFiles = {
           "keybinds" = ./keybinds.lua;
           "startup" = ./startup.lua;
+          "monitors" = ''
+            hl.monitor({
+              output = "",
+              mode = "preferred",
+              position = "auto",
+              scale = ${builtins.toString host.primaryDisplay.scale},
+              bitdepth = 8,
+              cm = "srgb"
+            });
+          '';
         };
       };
     };

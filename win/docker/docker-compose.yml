@@ -22,6 +22,7 @@ services:
       USERNAME: "alice" # Edit here to set a custom Windows username. The default is 'MyWindowsUser'.
       PASSWORD: "1" # Edit here to set a password for the Windows user. The default is 'MyWindowsPassword'.
       HOME: "${HOME}" # Set path to Linux user home folder.
+      ARGUMENTS: "-device usb-host,vendorid=0x17cc,productid=0xbaff -device usb-host,vendorid=0x125f,productid=0x0100"
     ports:
       # Map '8006' on Linux host to '8006' on Windows VM --> For VNC Web Interface @ http://127.0.0.1:8006.
       - "127.0.0.1:8006:8006"
@@ -44,6 +45,8 @@ services:
     devices:
       - /dev/kvm # Enable KVM.
       - /dev/net/tun # Enable tuntap
+      # Pass through usb devices
+      - /dev/bus/usb
       # Uncomment to mount a disk directly within the Windows VM.
       # WARNING: /dev/sdX paths may change after reboot. Use persistent identifiers!
       # NOTE: 'disk1' will be mounted as the main drive. THIS DISK WILL BE FORMATTED BY DOCKER.

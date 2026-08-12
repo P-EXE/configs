@@ -54,11 +54,9 @@
           win-spice
         ];
         systemd.tmpfiles.rules = [ "L+ /var/lib/qemu/firmware - - - - ${pkgs.qemu}/share/qemu/firmware" ];
-        users.users."alice" = {
-          extraGroups = [
-            "libvirtd"
-          ];
-        };
+        users.extraGroups.libvirtd.members = [
+          "alice"
+        ];
       };
     };
   };

@@ -42,7 +42,13 @@
         variant = "";
       };
       # Biometrics
-      services.fprintd.enable = true;
+      services.fprintd = { 
+        enable = true;
+        tod = { 
+          enable = true;
+          driver = pkgs.libfprint-2-tod1-goodix; # Goodix driver module
+        };
+      };
       # Audio
       services.pulseaudio.enable = false;
       security.rtkit.enable = true;

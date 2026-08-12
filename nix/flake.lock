@@ -208,11 +208,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1786110425,
-        "narHash": "sha256-FhmkVjoDaUaEhpLQlgpD9uwIVZZqdXnLops6IyVpJk4=",
+        "lastModified": 1786372980,
+        "narHash": "sha256-Ie/pK6CLnDK3YUsuRexODyrCNNLoEaCqltCYCqhlyUc=",
         "owner": "P-EXE",
         "repo": "helium",
-        "rev": "14c9b9e357430cc228bae6e087019d0abf8c69ae",
+        "rev": "cf3d543c3c8c20eaeb703aed1ac89ef2e610cbb3",
         "type": "github"
       },
       "original": {
