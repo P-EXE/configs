@@ -128,6 +128,7 @@
       };
 
       nixpkgs.config.allowUnfree = true;
+      programs.nix-ld.enable = true;
       nix.settings = {
         trusted-users = [ "@wheel" ];
         builders-use-substitutes = true;

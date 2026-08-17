@@ -7,6 +7,7 @@
 				pinentry-tty
 				kdePackages.kdeconnect-kde
 				rbw
+				nixfmt
 
 				# Desktop
 				spotify
@@ -23,13 +24,22 @@
 				#rpcs3
 				pcsx2
 				ppsspp
+
+				# Audio
+				mixxx
 			];
 			programs = {
-        vscode = {
+        vscodium = {
 					enable = true;
+					#package = pkgs.vscodium;
 					#package = pkgs.vscode.fhs; # enable for fhs, be aware that sudo doesn't work with fhs
 				};
-        firefox.enable = true;
+				vscode = {
+					enable = true;
+					#package = pkgs.vscodium;
+					package = pkgs.vscode.fhs; # enable for fhs, be aware that sudo doesn't work with fhs
+				};
+				firefox.enable = true;
 			};
 		};
 		nixos = { pkgs, lib, ... }: {

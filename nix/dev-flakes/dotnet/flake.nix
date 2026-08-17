@@ -1,29 +1,29 @@
 {
-  description = "C# dev flake template";
-  inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    flake-parts.url = "github:hercules-ci/flake-parts";
-  };
-  outputs = inputs @ {self, ...}: inputs.flake-parts.lib.mkFlake {inherit inputs;} {
-    systems = [
-      "aarch64-darwin"
-      "x86_64-darwin"
+  description = "A Nix-flake-based C# development environment";
+  inputs.nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1";
+  outputs = { self, ... }@inputs: let
+    inherit (inputs.nixpkgs) lib;
+    supportedSystems = [
       "x86_64-linux"
+      "aarch64-linux"
+      "aarch64-darwin"
     ];
-    perSystem = {pkgs, ...}: {
-      devShells = {
-        default = let 
-          dotnetSdk = pkgs.dotnetCorePackages.sdk_10_0;
-        in pkgs.mkShell {
-          nativeBuildInputs = [
-            dotnetSdk
-            
-            # Extra packages for whichever frameworks are used
-            pkgs.avalonia
-          ];
-          DOTNET_BIN = "${dotnetSdk}/bin/dotnet";
-        };
+    forEachSupportedSystem = f: lib.genAttrs supportedSystems (
+      system: f {
+        pkgs = import inputs.nixpkgs { inherit system; };
+      }
+    );
+  in
+  {
+    devShells = forEachSupportedSystem ({ pkgs }: {
+      default = pkgs.mkShell {
+        packages = with pkgs; [
+          dotnet-sdk_10
+          omnisharp-roslyn
+          mono
+          msbuild
+        ];
       };
-    };
+    });
   };
 }

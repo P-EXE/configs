@@ -37,6 +37,7 @@
         package = null; #inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
         portalPackage = null; #inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
         withUWSM = true;
+        systemd.enable = false;
       };
       environment.sessionVariables.NIXOS_OZONE_WL = "1";
       # !TODO doesn't work, pls fix

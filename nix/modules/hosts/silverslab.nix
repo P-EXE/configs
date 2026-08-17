@@ -1,6 +1,7 @@
 { den, lib, ... }: {
   den.aspects.silverslab = {
     includes = [
+      den.aspects.displayManagers.tuigreet
       den.aspects.desktops.hyprland
       den.aspects.virtualization
       den.aspects.winapps
@@ -45,7 +46,7 @@
       services.fprintd = { 
         enable = true;
         tod = { 
-          enable = true;
+          enable = false;
           driver = pkgs.libfprint-2-tod1-goodix; # Goodix driver module
         };
       };
@@ -95,13 +96,6 @@
     };
     _.software.nixos = { pkgs, ... }: {
       services.desktopManager.plasma6.enable = true;
-      services.displayManager.sddm = { 
-        enable = true;
-        wayland.enable = true;
-      };
-      services.displayManager.ly = {
-        enable = false;
-      };
 
       networking.networkmanager.enable = true;
       networking.wireless.iwd.enable = false;
@@ -123,6 +117,7 @@
       };
 
       nixpkgs.config.allowUnfree = true;
+      programs.nix-ld.enable = true;
       nix.settings = {
         trusted-users = [ "@wheel" ];
         builders-use-substitutes = true;
