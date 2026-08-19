@@ -1,5 +1,5 @@
 { den, inputs, ... }: {
-  flake-file.inputs.tuigreet.url = "github:NotAShelf/tuigreet";
+  flake-file.inputs.tuigreet.url = "github:tuigreet/tuigreet";
   den.aspects.displayManagers = {
     _.ly = {
       nixos = {
@@ -30,13 +30,15 @@
         };
       };
     };
-    _.tuigreet = { pkgs, config, ... } : {
-      services.greetd = {
-        enable = true;
-        settings = {
-          default_session = {
-            command = "${pkgs.greetd.tuigreet}/bin/tuigreet --sessions ${config.services.xserver.displayManager.sessionData.desktops}/share/xsessions:${config.services.xserver.displayManager.sessionData.desktops}/share/wayland-sessions --remember --remember-user-session";
-            user = "greeter";
+    _.tuigreet = {
+      nixos = { pkgs, config, ... } : {
+        services.greetd = {
+          enable = true;
+          settings = {
+            default_session = {
+              command = "${inputs.tuigreet.packages.${pkgs.stdenv.hostPlatform.system}.tuigreet}/bin/tuigreet --sessions ${config.services.xserver.displayManager.sessionData.desktops}/share/xsessions:${config.services.xserver.displayManager.sessionData.desktops}/share/wayland-sessions --remember --remember-user-session";
+              user = "greeter";
+            };
           };
         };
       };
