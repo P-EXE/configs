@@ -14,8 +14,14 @@
 				obsidian
 
 				# Graphics
-				blender
-				#(blender.override {cudaSupport=true;})
+				#blender
+				#(blender.override {
+				#	config.cudaSupport=true;
+				#	config.rocmSupport=true;
+				#})
+				#cudaPackages.cuda_cudart # Test for blender-cuda
+    		#cudaPackages.cudnn # Test for blender-cuda
+				freecad
 				inkscape
 				krita
 

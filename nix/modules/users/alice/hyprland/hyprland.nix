@@ -11,16 +11,14 @@
         extraLuaFiles = {
           "keybinds" = ./keybinds.lua;
           "startup" = ./startup.lua;
-          "monitors" = ''
+          "monitors" = ''${ builtins.concatStringsSep " " (map (m: ''
             hl.monitor({
-              output = "",
-              mode = "preferred",
-              position = "auto",
-              scale = ${builtins.toString host.primaryDisplay.scale},
-              bitdepth = 8,
-              cm = "srgb"
-            });
-          '';
+              output = "${m.name}",
+              mode = "${toString m.resolution.x}x${toString m.resolution.y}@${toString m.refreshRate}",
+              position = "${toString m.position.x}x${toString m.position.y}",
+              scale = ${toString m.scale},
+            })
+          '') host.displays)}'';
         };
       };
     };
