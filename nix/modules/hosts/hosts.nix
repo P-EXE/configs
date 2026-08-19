@@ -29,6 +29,8 @@
           bl.x = 12;
           bl.y = 12;
         };
+        position.x = 0;
+        position.y = 0;
       }
     ];
     primaryDisplay = builtins.elemAt displays 0;
@@ -41,8 +43,8 @@
     };
     displays = [
       {
-        name = "";
-        id = 0;
+        name = "DP-5";
+        id = 1;
         friendlyName = "LC49HG90DMRXEN";
         resolution.x = 3840;
         resolution.y = 1080;
@@ -53,15 +55,17 @@
         scale = 1;
         pseudoScale = 1;
         safeZones = {
-          tl.x = 24;
-          tl.y = 24;
-          tr.x = 24;
-          tr.y = 24;
-          br.x = 12;
-          br.y = 12;
-          bl.x = 12;
-          bl.y = 12;
+          tl.x = 8;
+          tl.y = 8;
+          tr.x = 8;
+          tr.y = 8;
+          br.x = 8;
+          br.y = 8;
+          bl.x = 8;
+          bl.y = 8;
         };
+        position.x = 0;
+        position.y = 0;
       }
     ];
     primaryDisplay = builtins.elemAt displays 0;

@@ -1,4 +1,4 @@
-{ den, inputs, ... }: {
+{ den, inputs, ... }: rec {
   flake-file = {
     inputs.hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";
@@ -43,6 +43,22 @@
     	color15 = "#FF0000";
 		};
     uiFont = "JetBrainsMono NF";
+    rotation = if (host.primaryDisplay.resolution.x / host.primaryDisplay.resolution.y < 1.7777) then
+      0 
+    else
+      90;
+    edge = if rotation == 0 then
+      "top"
+    else
+      "left";
+    pad = if rotation == 0 then
+      "0 ${toString (4 * host.primaryDisplay.pseudoScale)}px"
+    else
+      "${toString (4 * host.primaryDisplay.pseudoScale)}px 0";
+    side-padding = if rotation == 0 then
+      "4px ${(toString host.primaryDisplay.safeZones.tr.x)}px 4px ${(toString host.primaryDisplay.safeZones.tl.x)}px"
+    else
+      "${(toString host.primaryDisplay.safeZones.tr.x)}px 4px ${(toString host.primaryDisplay.safeZones.tl.x)}px 4px";
 	in {
 		# !TODO Is this really needed?
 		#homeManager = {
@@ -96,7 +112,7 @@
       programs.waybar = {
         settings.mainBar = {
 			    layer = "bottom";
-          position = "top";
+          position = edge;
           modules-left = [ "hyprland/workspaces" "wlr/taskbar" ];
           modules-center = [ "custom/media" ];
           modules-right = [ "tray" "hyprland/language" "bluetooth" "network" "cpu" "memory" "temperature" "backlight" "wireplumber#source" "wireplumber#sink" (if host.battery != null then "battery" else "") "clock" ];
@@ -108,7 +124,7 @@
             tooltip-format = "{title}";
             on-click = "activate";
             on-click-middle = "close";
-            rotate = 0;
+            rotate = rotation;
           };
           "custom/media" = {
             format = "{icon} {text}";
@@ -125,13 +141,13 @@
           "tray" = {
             icon-size = 10;
             spacing = 8;
-            rotate = 0;
+            rotate = rotation;
           };
           "hyprland/language" = {
             format = "{}";
             format-de = "DE";
             format-en = "US";
-            rotate = 0;
+            rotate = rotation;
           };
           "bluetooth" = {
             #"controller" = "controller1";
@@ -154,17 +170,17 @@
             tooltip-format = "if: {ifname}\nip: {ipaddr}/{cidr}/{cidr6}\ngw: {gwaddr}";
             tooltip-format-wifi = "if: {ifname}\nip: {ipaddr}/{cidr}/{cidr6}\ngw: {gwaddr}\nstr: {signalStrength}\nstr dB: {signaldBm}\nfreq: {frequency} GHz\nup: {bandwidthUpBits}\ndown: {bandwidthDownBits}";
             on-click = "hyprctl dispatch -- exec kitty -e impala";
-            rotate = 0;
+            rotate = rotation;
           };
           "cpu" = {
             format = " {usage}%";
             on-click = "hyprctl dispatch -- exec kitty -e btop";
-            rotate = 0;
+            rotate = rotation;
           };
           "memory" = {
             format = " {}%";
             on-click = "hyprctl dispatch -- exec kitty -e btop";
-            rotate = 0;
+            rotate = rotation;
           };
 			    "temperature" = {
             #thermal-zone = 2;
@@ -173,17 +189,19 @@
             #format-critical = "{icon} {temperatureC}°C";
             format = "{icon} {temperatureC}°C";
             format-icons = ["󰉬" "" "󰉪"];
+            rotate = rotation;
     	    };
           #"wireplumber" = {
           # format = "SPKR: {volume}%-{node_name}";
           #  format-muted = "SPKR: Muted-{node_name}";
           #  on-click = "";
           #  format-icons = ["◂" "◄" "◀"];
-          #  rotate = 0;
+          #  rotate = rotation;
           #};
           "backlight" = {
             format = "{icon} {percent}%";
             format-icons = [ "󰃞" "󰃟" "󰃠" ];
+            rotate = rotation;
           };
           "wireplumber#sink" = {
             format = "{icon} {volume}%";
@@ -192,6 +210,7 @@
             on-click = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
             on-click-right = "helvum";
             scroll-step = 5;
+            rotate = rotation;
           };
           "wireplumber#source" = {
             node-type = "Audio/Source";
@@ -200,6 +219,7 @@
             format-icons = ["" "" ""];
             on-click = "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle";
             scroll-step = 5;
+            rotate = rotation;
           };
           "pulseaudio" = {
             scroll-step = 1;
@@ -219,7 +239,7 @@
               "default" = ["" " " " "];
             };
             on-click = "pavucontrol";
-            rotate = 0;
+            rotate = rotation;
           };
           "battery" = {
             states = {
@@ -235,10 +255,11 @@
             #format-good = "";
             #format-full = "";
             format-icons = ["" "" "" "" ""];
+            rotate = rotation;
     	    };
           "clock" = {
             format = "{:L%A %d.%m.%Y(W%V) %H:%M:%S (%z)}";
-            rotate = 0;
+            rotate = rotation;
           };
           "custom/waybar-mpris" = {
             "return-type"= "json";
@@ -253,7 +274,7 @@
             #"on-scroll-up" = "waybar-mpris --send next";
             #"on-scroll-down" = "waybar-mpris --send prev";
             "escape" = true;
-            rotate = 0;
+            rotate = rotation;
           };
         };
         style = ''
@@ -265,7 +286,7 @@
           window#waybar>box {
             background: #000000;
             font-size: ${toString(10 * host.primaryDisplay.pseudoScale)}px;
-            padding: ${toString (2 * host.primaryDisplay.pseudoScale)}px ${toString host.primaryDisplay.safeZones.tl.x}px;
+            padding: ${toString(side-padding)};
           }
       
           tooltip {
@@ -280,7 +301,7 @@
           #workspaces {
           }
           #workspaces button {
-            padding: ${toString (4 * host.primaryDisplay.pseudoScale)}px;
+            padding: ${toString(pad)};
             color: ${uiColors.color5};
             font-family: '${uiFont} ExtraBold';
           }
@@ -289,52 +310,52 @@
             font-family: '${uiFont}';
           }
           #taskbar {
-            padding: ${toString (2 * host.primaryDisplay.pseudoScale)}px;
+            padding: ${toString(pad)};
           }
           #taskbar * {
-            padding: ${toString (1 * host.primaryDisplay.pseudoScale)}px;
+            padding: ${toString(pad)};
           }
       
           #tray {
-            padding: ${toString (1 * host.primaryDisplay.pseudoScale)}px;
+            padding: ${toString(pad)};
           }
           #language {
-            padding: 0px ${toString (8 * host.primaryDisplay.pseudoScale)}px 0px 0px;
+            padding: ${toString(pad)};
           }
           #bluetooth {
-            padding: 0px ${toString (12 * host.primaryDisplay.pseudoScale)}px 0px 0px;
+            padding: ${toString(pad)};
             /* color: #ff6188; */
           }
           #network {
-            padding: 0px ${toString (14 * host.primaryDisplay.pseudoScale)}px 0px 0px;
+            padding: ${toString(pad)};
             /* color: #fc9867; */
           }
           #cpu {
-            padding: 0px ${toString (6 * host.primaryDisplay.pseudoScale)}px 0px 0px;
+            padding: ${toString(pad)};
             /* color: #ffd866; */
           }
           #memory {
-            padding: 0px ${toString (6 * host.primaryDisplay.pseudoScale)}px 0px 0px;
+            padding: ${toString(pad)};
             /* color: #ffd866; */
           }
           #temperature {
-            padding: 0px ${toString (12 * host.primaryDisplay.pseudoScale)}px 0px 0px;
+            padding: ${toString(pad)};
             /* color: #ffd866; */
           }
           #backlight {
-            padding: 0px ${toString (10 * host.primaryDisplay.pseudoScale)}px 0px 0px;
+            padding: ${toString(pad)};
             /* color: #ffd866; */
           }
           #wireplumber.source {
-            padding: 0px ${toString (4 * host.primaryDisplay.pseudoScale)}px 0px 0px;
+            padding: ${toString(pad)};
             /* color: #a9dc76; */
           }
           #wireplumber.sink {
-            padding: 0px ${toString (10 * host.primaryDisplay.pseudoScale)}px 0px 0px;
+            padding: ${toString(pad)};
             /* color: #a9dc76; */
           }
           #battery {
-            padding: 0px ${toString (12 * host.primaryDisplay.pseudoScale)}px 0px 0px;
+            padding: ${toString(pad)};
             /* color: #78dce8; */
           }
           #clock {

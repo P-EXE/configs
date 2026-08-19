@@ -1,0 +1,12 @@
+title: My script
+description: ""
+author: ''
+license: ''
+version: ''
+last_updated: 2026-02-25 21:17:19 UTC
+script_language_version: '1.1'
+script: |
+  $if(%album%,%album%)
+  $if(%catalognumber%, $if(%label%,[%label% - %catalognumber%]), $if(%label%,[%label%]))/
+  $num(%tracknumber%,2) %artists% - %title%
+id: 5ef73ec8-b880-47fb-83de-207769725373
