@@ -11,13 +11,7 @@
     programs.firefox.enable = true;
 		programs.chromium = {
 			enable = true;
-			package = pkgs.ungoogled-chromium;
-			extensions = [
-				{ id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; }
-			];
+			package = inputs.helium.packages.${pkgs.stdenv.hostPlatform.system}.default;
 		};
-		home.packages = [
-			inputs.helium
-		];
   };
 }

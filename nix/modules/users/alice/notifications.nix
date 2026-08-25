@@ -4,7 +4,7 @@
     settings = {
       global = {
         monitor = 0;
-        follow  = "none";
+        follow = "none";
         width = 300;
         height = 300;
         offset = "30x50";
@@ -14,8 +14,7 @@
         background = "#000000";
         frame_width = 0;
         font = "JetBrains Mono 9";
-      };
-      urgency_normal = {
+
         timeout = 1;
       };
     };

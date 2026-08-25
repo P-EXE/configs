@@ -13,7 +13,7 @@ hl.config({
     dim_strength = 0.6,
     blur = {
       enabled = false,
-      size = 128,
+      size = 100,
       passes = 3,
       noise = 0.1,
       contrast = 1.0,

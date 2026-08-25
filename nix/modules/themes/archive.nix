@@ -66,27 +66,28 @@
 		#};
 		homeManager = { pkgs, ... }: {
       wayland.windowManager.hyprland.plugins = [
-        inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprbars
+        #inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprbars
+        pkgs.hyprlandPlugins.hyprbars
       ];
       wayland.windowManager.hyprland = {
         extraLuaFiles = {
           "theme" = ./archive.lua;
-          "hyprbars" = ''
-            hl.config({
-              plugin = {
-                hyprbars = {
-                  enabled = true,
-                  bar_height = 18,
-                  bar_title_enabled = true,
-                  bar_text_size = ${builtins.toString(builtins.floor (10 * host.primaryDisplay.pseudoScale))},
-                  bar_text_font = "JetBrains Mono",
-                  bar_text_align = "left",
-                  bar_padding = 4,
-                  bar_color = "rgb(0, 0, 0)",
-                }
-              }
-            })
-          '';
+          #"hyprbars" = ''
+          #  hl.config({
+          #    plugin = {
+          #      hyprbars = {
+          #        enabled = true,
+          #        bar_height = 18,
+          #        bar_title_enabled = true,
+          #        bar_text_size = ${builtins.toString(builtins.floor (10 * host.primaryDisplay.pseudoScale))},
+          #        bar_text_font = "JetBrains Mono",
+          #        bar_text_align = "left",
+          #        bar_padding = 4,
+          #        bar_color = "rgb(0, 0, 0)",
+          #      }
+          #    }
+          #  })
+          #'';
         };
 		  };
       programs.tofi.settings = {
@@ -96,9 +97,9 @@
     	  outline-width = 0;
     	  padding-left = 32;
     	  padding-top = 0;
-    	  result-spacing = builtins.floor (-64 * host.primaryDisplay.pseudoScale);
+    	  result-spacing = builtins.floor (-32 * host.primaryDisplay.pseudoScale);
     	  num-results = 0;
-    	  font = uiFont + " Medium";
+    	  font = "Helvetica Neue LT Pro Bold";
     	  #font-variations = "wght 100";
     	  #font-features = "ss08 on";
     	  font-size = "${builtins.toString (128 * host.primaryDisplay.pseudoScale)}px";

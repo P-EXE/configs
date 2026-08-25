@@ -21,6 +21,9 @@
           '') host.displays)}'';
         };
       };
+      home.packages = [
+        pkgs.hyprshot
+      ];
     };
   };
 }
