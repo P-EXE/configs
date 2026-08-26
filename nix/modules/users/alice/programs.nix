@@ -12,6 +12,7 @@
 				# Desktop
 				spotify
 				obsidian
+				vesktop
 
 				# Graphics
 				#blender
