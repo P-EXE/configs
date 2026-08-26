@@ -90,7 +90,7 @@
           bl.y = 8;
         };
         position.x = 3840;
-        position.y = 0;
+        position.y = -300;
       }
     ];
     primaryDisplay = builtins.elemAt displays 0;
