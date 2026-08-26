@@ -1,4 +1,4 @@
-{ den, lib, ... }: {
+{ den, lib, inputs, ... }: {
   den.aspects.whitebox = {
     includes = [
       den.aspects.desktops.hyprland
@@ -103,11 +103,20 @@
         };
       };
     };
-    _.software.nixos = { pkgs, ... }: {
+    _.software.nixos = { pkgs, config, ... }: {
       services.desktopManager.plasma6.enable = true;
       services.displayManager.sddm = { 
-        enable = true;
+        enable = false;
         wayland.enable = true;
+      };
+      services.greetd = {
+        enable = true;
+        settings = {
+          default_session = {
+            command = "${inputs.tuigreet.packages.${pkgs.stdenv.hostPlatform.system}.tuigreet}/bin/tuigreet --sessions ${config.services.displayManager.sessionData.desktops}/share/xsessions:${config.services.displayManager.sessionData.desktops}/share/wayland-sessions --remember --remember-user-session";
+            user = "greeter";
+          };
+        };
       };
 
       networking.networkmanager.enable = true;

@@ -1,7 +1,7 @@
 local mod = "SUPER"
 hl.config({
   input = {
-    kb_layout = "us";
+    kb_layout = "us,de";
     kb_options = "grp:alt_space_toggle";
     repeat_rate = 25;
     repeat_delay = 300;

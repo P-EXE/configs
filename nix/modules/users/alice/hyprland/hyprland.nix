@@ -19,6 +19,9 @@
               scale = ${toString m.scale},
             })
           '') host.displays)}'';
+          "workspaceRules" = ''
+            hl.workspace_rule({ workspace = "1", monitor = "${(builtins.elemAt host.displays 0).name}", default = true})
+          '';
         };
       };
       home.packages = [

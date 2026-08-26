@@ -48,8 +48,8 @@
         friendlyName = "LC49HG90DMRXEN";
         resolution.x = 3840;
         resolution.y = 1080;
-        size.x = 1196;
-        size.y = 336;
+        size.x = 1200;
+        size.y = 340;
         dpi = 82;
         refreshRate = 144;
         scale = 1;
@@ -65,6 +65,31 @@
           bl.y = 8;
         };
         position.x = 0;
+        position.y = 0;
+      }
+      {
+        name = "HDMI-A-2";
+        id = 0;
+        friendlyName = "AOC 2460";
+        resolution.x = 1920;
+        resolution.y = 1080;
+        size.x = 530;
+        size.y = 300;
+        dpi = 82;
+        refreshRate = 60;
+        scale = 1;
+        pseudoScale = 1;
+        safeZones = {
+          tl.x = 8;
+          tl.y = 8;
+          tr.x = 8;
+          tr.y = 8;
+          br.x = 8;
+          br.y = 8;
+          bl.x = 8;
+          bl.y = 8;
+        };
+        position.x = 3840;
         position.y = 0;
       }
     ];
