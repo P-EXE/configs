@@ -41,8 +41,6 @@
         layout = "us";
         variant = "";
       };
-      # Biometrics
-      services.fprintd.enable = true;
       # Audio
       services.pulseaudio.enable = false;
       security.rtkit.enable = true;
@@ -56,10 +54,6 @@
         # no need to redefine it in your config for now)
         #media-session.enable = true;
       };
-      # Display
-      environment.systemPackages = with pkgs; [
-        brightnessctl
-      ];
     };
     _.firmware.nixos = { pkgs, lib, config, ... }: {
       boot.loader.systemd-boot.enable = true;
@@ -70,10 +64,14 @@
       boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
       boot.initrd.kernelModules = [ ];
       boot.kernelModules = [ "kvm-amd" ];
-      boot.blacklistedKernelModules = [ "hid-apple" ];
+      boot.blacklistedKernelModules = [ ];
       boot.extraModulePackages = [ ];
       nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
       hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+      boot.extraModprobeConfig = ''
+        options hid_apple fnmode=2
+      '';
+      # Added: "options hid_apple fnmode=2" to /etc/modprobe.d/hid_apple.conf
 
       services.gvfs.enable = true;
       services.udisks2.enable = true;
