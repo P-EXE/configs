@@ -77,17 +77,8 @@
       services.udisks2.enable = true;
 
       hardware.graphics.enable = true;
-      services.xserver.enable = true;
-      services.xserver.videoDrivers = ["nvidia"];
-      hardware.nvidia = {
-        modesetting.enable = true;
-        powerManagement.enable = false;
-        powerManagement.finegrained = false;
-        open = false;
-        nvidiaSettings = true;
-        package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
-      };
       hardware.graphics.enable32Bit = true;
+      services.xserver.enable = true;
       environment.sessionVariables = {
         NO_HARDWARE_CURSORS = 1;
       };
@@ -156,7 +147,8 @@
     };
     provides.to-users.homeManager = { pkgs, ... }: {
       home.packages = with pkgs; [ 
-      
+        # Gaming
+        prismlauncher
       ];
     };
   };
