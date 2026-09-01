@@ -5,7 +5,6 @@
       den.aspects.desktops.hyprland
       den.aspects.virtualization
       den.aspects.winapps
-      den.aspects.alice._.music
     ] ++ lib.attrValues den.aspects.silverslab._;
 
     desktop = "hyprland";

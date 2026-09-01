@@ -1,16 +1,14 @@
 {
   den,
-  lib,
   inputs,
   ...
 }:
 {
   den.aspects.whitebox._.nvidia = {
     nixos =
-      { }:
+      { config, ... }:
       let
-        pkgs = import nixpkgs {
-          inherit system;
+        pkgs = import inputs.nixpkgs {
           config.allowUnfree = true;
           config.cudaSupport = true;
           config.cudaVersion = "12";

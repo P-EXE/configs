@@ -5,10 +5,6 @@
 
   inputs = {
     awww.url = "git+https://codeberg.org/LGFae/awww";
-    bitwig-studio-patched = {
-      url = "path:/home/alice/Projects/bitwig";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     bunny-yazi = {
       url = "github:stelcodes/bunny.yazi";
       flake = false;
@@ -36,7 +32,6 @@
       inputs.hyprland.follows = "hyprland";
     };
     import-tree.url = "github:vic/import-tree";
-    musnix.url = "github:musnix/musnix";
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     tuigreet.url = "github:tuigreet/tuigreet";
     winapps = {

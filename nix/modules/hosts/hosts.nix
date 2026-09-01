@@ -98,6 +98,11 @@
     };
   };
 
+  den.hosts.x86_64-linux.blackbox.users = {
+    admin = { };
+    yuni = { };
+  };
+
   # define an standalone home-manager for tux
   # den.homes.x86_64-linux.alice = { };
 
