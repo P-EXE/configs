@@ -368,7 +368,7 @@
       programs.kitty = {
 		    enable = true;
 		    settings = {
-		      font_size = builtins.toString (8 * host.primaryDisplay.pseudoScale);
+		      font_size = builtins.toString (6 * host.primaryDisplay.pseudoScale);
 		      font_family = uiFont + " Regular";
 		      cursor_shape = "beam";
 		      cursor_shape_unfocused = "unchanged";
