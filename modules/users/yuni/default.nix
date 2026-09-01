@@ -10,6 +10,11 @@
       home.packages = with pkgs; [ 
       ];
     };
+    nixos = {
+      users.users.yuni.extraGroups = [
+        "sambagroup"
+      ];
+    };
     provides.to-hosts.nixos = { pkgs, ... }: { };
   };
 }
