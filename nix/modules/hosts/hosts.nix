@@ -100,18 +100,13 @@
 
   den.hosts.x86_64-linux.blackbox = rec {
     users = {
-      admin = {
-        #initialPassword = "admin";
-      };
-      alice = { };
-      yuni = { };
-      petra = { };
+      admin = { };
     };
     displays = [
     ];
     primaryDisplay = { };
     battery = { };
-    hasDesktop = false;
+    hasDesktop = true;
   };
 
   # define an standalone home-manager for tux
