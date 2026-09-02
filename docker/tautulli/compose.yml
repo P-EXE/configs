@@ -1,0 +1,33 @@
+services:
+  tautulli:
+    image: ghcr.io/tautulli/tautulli
+    container_name: tautulli
+    restart: unless-stopped
+    volumes:
+      - ./config:/config
+    environment:
+        PUID: ${PUID}
+        PGID: ${PGID}
+        TZ: ${TZ}
+    networks:
+      - traefik
+    labels:      
+      - traefik.enable=true
+      - traefik.http.routers.tautulli.rule=Host(`tautulli.blackbox.lab.p-exe.com`)
+      - traefik.http.routers.tautulli.entrypoints=web
+      - traefik.http.services.tautulli.loadbalancer.server.port=8181
+
+      - homepage.group=Media
+      - homepage.name=Tautulli
+      - homepage.icon=tautulli.png
+      - homepage.href=tautulli.blackbox.lab.p-exe.com
+      - homepage.description=Plex monitoring
+      - homepage.widget.type=tautulli
+      - homepage.widget.url=http://tautulli.blackbox.lab.p-exe.com
+      - homepage.widget.key=${TAUTULLI_KEY} # has to match with the api key in: Settings > Web Interface > API
+      - homepage.widget.enableUser=true # optional, defaults to false
+      - homepage.widget.showEpisodeNumber=true # optional, defaults to false
+      - homepage.widget.expandOneStreamToTwoRows=true # optional, defaults to true
+networks:
+  traefik:
+    external: true

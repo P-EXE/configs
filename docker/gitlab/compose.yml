@@ -1,0 +1,23 @@
+services:
+  gitlab:
+    image: gitlab/gitlab-ce:18.7.1-ce.0
+    container_name: gitlab
+    shm_size: '256m'
+    restart: unless-stopped
+    ports:
+      - 2424:22
+    volumes:
+      - ./gitlab.rb:/etc/gitlab/gitlab.rb:ro
+      - ./config:/etc/gitlab
+      - ./logs:/var/log/gitlab
+      - ./data:/var/opt/gitlab
+    networks:
+      - traefik
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.gitlab-http.rule=Host(`${HOST}`)
+      - traefik.http.routers.gitlab-http.entrypoints=web
+      - traefik.http.services.gitlab-service.loadbalancer.server.port=${PORT}
+networks:
+  traefik:
+    external: true

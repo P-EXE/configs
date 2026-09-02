@@ -1,0 +1,39 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/configs/services/
+
+- Infra:
+    -  OPNSense:
+        icon: opnsense.svg
+        href: http://192.168.1.1
+        description: Router
+    - Traefik:
+        icon: traefik.svg
+        href: http://blackbox.lab.p-exe.com:8080
+        description: Reverse proxy
+    - Nginx:
+        icon: nginx.svg
+        href: http://nginx-test.blackbox.lab.p-exe.com
+        description: Test webserver
+
+- Media:
+    - Plex:
+        icon: plex.svg
+        href: http://blackbox.lab.p-exe.com:32400/web/index.html#!/
+        description: Media library & player running locally
+    - Jellyfin:
+        icon: jellyfin.svg
+        href: http://jellyfin.blackbox.lab.p-exe.com/web/#/home
+        description: Media library & player
+
+- Development:
+    - GitLab:
+        icon: gitlab.svg
+        href: http://gitlab.blackbox.lab.p-exe.com
+        description: Git server
+
+- Office:
+    - Nextcloud:
+        icon: nextcloud.svg
+        href: http://nextcloud.blackbox.lab.p-exe.com
+        description: Cloud drive, calendar & more

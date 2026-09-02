@@ -1,0 +1,19 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/configs/bookmarks
+
+- External Services:
+    - YouTube:
+        - abbr: YT
+          icon: youtube.svg
+          href: https://youtube.com/
+
+- About:
+    - Source:
+        - abbr: SRC
+          icon: github.svg
+          href: https://github.com/P-EXE/containerization
+    - homepage:
+        - abbr: HP
+          icon: homepage.svg
+          href: https://gethomepage.dev/

@@ -1,0 +1,43 @@
+services:
+  jellyfin:
+    image: jellyfin/jellyfin
+    container_name: jellyfin
+    restart: 'unless-stopped'
+    # Optional - specify the uid and gid you would like Jellyfin to use instead of root
+    #user: uid:gid
+    #ports:
+    #  - 8096:8096/tcp
+    #  - 7359:7359/udp
+    volumes:
+      - ./config:/config
+      - ./cache:/cache
+      - type: bind
+        source: /mnt/potentially_broken_drive/shares/internal/Media/
+        target: /media
+        #read_only: true
+      # Optional - extra fonts to be used during transcoding with subtitle burn-in
+      - type: bind
+        source: /path/to/fonts
+        target: /usr/local/share/fonts/custom
+        read_only: true
+    
+    # Optional - alternative address used for autodiscovery
+    #environment:
+    #  - JELLYFIN_PublishedServerUrl=http://example.com
+    # Optional - may be necessary for docker healthcheck to pass if running in host network mode
+    #extra_hosts:
+    #  - 'host.docker.internal:host-gateway'
+
+    networks:
+      - traefik
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.jellyfin.rule=Host(`${HOST}`)
+      - traefik.http.routers.jellyfin.entrypoints=web
+      - traefik.http.routers.jellyfin.service=jellyfin
+      - traefik.http.services.jellyfin.loadbalancer.server.port=${PORT}
+      - traefik.docker.network=traefik
+
+networks:
+  traefik:
+    external: true

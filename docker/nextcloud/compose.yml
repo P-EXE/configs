@@ -1,0 +1,53 @@
+services:
+  mariadb:
+    image: mariadb:latest
+    container_name: nextcloud_mariadb
+    restart: unless-stopped
+    command: --transaction-isolation=READ-COMMITTED --log-bin=ROW --skip-innodb-read-only-compressed
+    volumes:
+      - ./mysql-data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD 
+      - MYSQL_PASSWORD
+      - MYSQL_DATABASE
+      - MYSQL_USER
+    networks:
+      - default
+
+  redis:
+    image: redis:alpine
+    container_name: nextcloud_redis
+    hostname: nextcloud_redis
+    restart: unless-stopped
+    command: redis-server --requirepass ${REDIS_PASSWORD}
+    networks:
+      - default
+
+  nextcloud-app:
+    image: nextcloud
+    container_name: nextcloud_app
+    restart: unless-stopped
+    depends_on:
+      - mariadb
+      - redis
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_HOST_PASSWORD=${REDIS_PASSWORD}
+      - MYSQL_HOST=mariadb
+      - MYSQL_USER
+      - MYSQL_PASSWORD
+      - MYSQL_DATABASE
+    volumes:
+      - ./nextcloud:/var/www/html
+    networks:
+      - default
+      - traefik
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.nextcloud.rule=Host(`${HOST}`)
+      - traefik.http.routers.nextcloud.entrypoints=web
+      - traefik.http.services.nextcloud.loadbalancer.server.port=${PORT}
+      - traefik.http.services.nextcloud.loadbalancer.passHostHeader=true
+networks:
+  traefik:
+    external: true

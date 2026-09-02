@@ -1,0 +1,15 @@
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx-test
+    networks:
+      - traefik
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.nginx-http.rule=Host(`nginx-test.blackbox.lab.p-exe.com`)
+      - traefik.http.routers.nginx-http.entrypoints=web
+    restart: unless-stopped
+
+networks:
+  traefik:
+    external: true

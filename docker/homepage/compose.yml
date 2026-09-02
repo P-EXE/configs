@@ -1,0 +1,22 @@
+services:
+  homepage:
+    image: ghcr.io/gethomepage/homepage:latest
+    container_name: homepage
+    restart: unless-stopped
+    #ports:
+    #  - 3000:3000
+    volumes:
+      - ./config:/app/config # Make sure your local config directory exists
+      - /var/run/docker.sock:/var/run/docker.sock:ro # (optional) For docker integrations
+      - ./images:/app/public/images # (optional) Add background images here
+    environment:
+      HOMEPAGE_ALLOWED_HOSTS: ${HOST} # required, may need port. See gethomepage.dev/installation/#homepage_allowed_hosts
+    networks:
+      - traefik
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.homepage.rule=Host(`${HOST}`)
+      - traefik.http.routers.homepage.entrypoints=web
+networks:
+  traefik:
+    external: true

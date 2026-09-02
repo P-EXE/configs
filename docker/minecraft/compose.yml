@@ -1,0 +1,22 @@
+services:
+  minecraft:
+    image: itzg/minecraft-server:latest
+    pull_policy: daily
+    tty: true
+    stdin_open: true
+    ports:
+      - "25565:25565"
+    environment:
+      EULA: "TRUE"
+    volumes:
+      # attach the relative directory 'data' to the container's /data path
+      - ./data:/data
+
+    labels:
+      - homepage.group=Gaming
+      - homepage.name=Minecraft
+      - homepage.icon=minecraft.svg
+      - homepage.href=blackbox.lab.p-exe.com:25565
+      - homepage.description=Minecraft server
+      - homepage.widget.type=minecraft
+      - homepage.widget.url=udp://blackbox.lab.p-exe.com:25565

@@ -1,0 +1,49 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/configs/settings/
+
+disableIndexing: true
+
+title: Blackbox
+description: Dashboard for all services running on Blackbox
+
+background:
+  image: "/images/black_unity_22_wallpaper_mac.png"
+  blur: xl # sm, md, xl... see https://tailwindcss.com/docs/backdrop-blur
+  saturate: 100 # 0, 50, 100... see https://tailwindcss.com/docs/backdrop-saturate
+  brightness: 50 # 0, 50, 75... see https://tailwindcss.com/docs/backdrop-brightness
+  opacity: 20 # 0-100
+
+theme: dark
+color: neutral
+useEqualHeights: true
+disableCollapse: true
+target: _blank
+
+headerStyle: boxed
+showStats: false
+
+layout:
+  Infra:
+    header: true
+    style: row
+    columns: 3
+  Media:
+    header: true
+    style: row
+    columns: 3
+  Development:
+    header: true
+    style: row
+    columns: 3
+  Office:
+    header: true
+    style: row
+    columns: 3
+  Bookmarks:
+    header: true
+    style: column
+
+providers:
+  openweathermap: openweathermapapikey
+  weatherapi: weatherapiapikey
