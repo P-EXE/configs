@@ -1,8 +1,14 @@
-{ den, inputs, lib, ... }: {
+{
+  den,
+  inputs,
+  lib,
+  ...
+}:
+{
   den.aspects.blackbox._.virtualization = {
     includes = lib.attrValues den.aspects.virtualization._;
     _.containers = {
-      nixos = {pkgs, ...}: {
+      nixos = { pkgs, ... }: {
         virtualisation = {
           containers.enable = true;
           docker = {
@@ -17,7 +23,10 @@
             defaultNetwork.settings.dns_enabled = true;
           };
         };
-        users.extraGroups.docker.members = [ "admin" ];
+        users.extraGroups.docker.members = [
+          "admin"
+          "alice"
+        ];
         # Useful other development tools
         environment.systemPackages = with pkgs; [
           dive # look into docker image layers
@@ -29,7 +38,7 @@
       };
     };
     _.vm = {
-      nixos = { pkgs, ...}: {
+      nixos = { pkgs, ... }: {
         virtualisation = {
           libvirtd = {
             enable = true;
@@ -55,6 +64,7 @@
         ];
         systemd.tmpfiles.rules = [ "L+ /var/lib/qemu/firmware - - - - ${pkgs.qemu}/share/qemu/firmware" ];
         users.extraGroups.libvirtd.members = [
+          "admin"
           "alice"
         ];
       };
