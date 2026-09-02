@@ -11,7 +11,7 @@
       };
     };
   };
-  den.aspects.desktops._.hyprland = {
+  den.aspects.desktop._.hyprland = {
     nixos = { pkgs, ... }: {
       programs.hyprland = {
         enable = true;
@@ -30,16 +30,14 @@
         trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
       };
     };
-    homeManager = { pkgs, ... }: {
+    provides.to-users.homeManager = {
       wayland.windowManager.hyprland = {
         enable = true;
         # set the flake package
         package = null; #inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
         portalPackage = null; #inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
-        withUWSM = true;
         systemd.enable = false;
       };
-      environment.sessionVariables.NIXOS_OZONE_WL = "1";
       # !TODO doesn't work, pls fix
       nix.settings = {
         substituters = ["https://hyprland.cachix.org"];

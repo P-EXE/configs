@@ -7,11 +7,12 @@
       };
     };
   };
-  den.aspects.alice._.browser.homeManager = { pkgs, ... }: {
-    programs.firefox.enable = true;
+  den.aspects.alice._.desktopPrograms._.browser.homeManager = { host, pkgs, ... }: {
+    programs.firefox.enable = host.hasDesktop;
 		programs.chromium = {
-			enable = true;
-			package = inputs.helium.packages.${pkgs.stdenv.hostPlatform.system}.default;
+			enable = host.hasDesktop;
+			package = pkgs.ungoogled-chromium;
+      #package = inputs.helium.packages.${pkgs.stdenv.hostPlatform.system}.default; # WIP
 		};
   };
 }

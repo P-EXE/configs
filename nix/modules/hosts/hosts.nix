@@ -34,8 +34,8 @@
       }
     ];
     primaryDisplay = builtins.elemAt displays 0;
-    battery = {
-    };
+    battery = { };
+    hasDesktop = true;
   };
   den.hosts.x86_64-linux.whitebox = rec {
     users.alice = {
@@ -94,13 +94,24 @@
       }
     ];
     primaryDisplay = builtins.elemAt displays 0;
-    battery = {
-    };
+    battery = { };
+    hasDesktop = true;
   };
 
-  den.hosts.x86_64-linux.blackbox.users = {
-    admin = { };
-    yuni = { };
+  den.hosts.x86_64-linux.blackbox = rec {
+    users = {
+      admin = {
+        #initialPassword = "admin";
+      };
+      alice = { };
+      yuni = { };
+      petra = { };
+    };
+    displays = [
+    ];
+    primaryDisplay = { };
+    battery = { };
+    hasDesktop = false;
   };
 
   # define an standalone home-manager for tux

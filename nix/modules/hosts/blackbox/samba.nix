@@ -74,18 +74,6 @@
             "write list" = "yuni";
             "vfs objects" = "catia fruit streams_xattr";
           };
-          "ingrid" = {
-            "path" = "/mnt/storage/shares/ingrid";
-            #"path" = "/mnt/potentially_broken_drive/shares/ingrid";
-            "browseable" = "no";
-            "read only" = "yes";
-            "public" = "no";
-            "create mask" = "0755";
-            "directory mask" = "0755";
-            "valid users" = "ingrid";
-            "write list" = "ingrid";
-            "vfs objects" = "catia fruit streams_xattr";
-          };
         };
       };
       services.samba-wsdd = {
