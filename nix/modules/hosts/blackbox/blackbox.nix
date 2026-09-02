@@ -84,6 +84,10 @@
           "dm-raid"
         ];
         boot.extraModulePackages = [ ];
+
+        # for traefik in rootless podman
+        boot.kernel.sysctl = { "net.ipv4.ip_unprivileged_port_start" = 80 };
+
         # CPU
         nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
         hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;

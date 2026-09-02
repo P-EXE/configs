@@ -1,6 +1,7 @@
 services:
   mc:
-    image: itzg/minecraft-server
+    image: itzg/minecraft-server:latest
+    restart: unless_stopped
     environment:
       EULA: "true"
       TYPE: FABRIC
@@ -18,8 +19,17 @@ services:
       
       MODRINTH_PROJECTS: |
         fabric-api
+    tty: true
     ports:
       - "25565:25565"
+    labels:
+      - homepage.group=Gaming
+      - homepage.name=Minecraft
+      - homepage.icon=minecraft.svg
+      - homepage.href=blackbox.lab.p-exe.com:25565
+      - homepage.description=Minecraft server
+      - homepage.widget.type=minecraft
+      - homepage.widget.url=udp://blackbox.lab.p-exe.com:25565
     volumes:
       - fabric:/data
 
