@@ -1,20 +1,19 @@
 { den, lib, ... }: {
   # host aspect
   den.aspects.blackbox = {
-    includes = [
-      den.aspects.blackbox.hardware
-      den.aspects.blackbox.firmware
-      den.aspects.blackbox.software
-
-      den.aspects.blackbox.ssh
-      den.aspects.blackbox.samba
-      den.aspects.blackbox.virtualization.containers
-      den.aspects.blackbox.virtualization.vm
+    includes = with den.aspects; [
+      blackbox.hardware
+      blackbox.firmware
+      blackbox.software
+      blackbox.ssh
+      blackbox.samba
+      blackbox.virtualization.containers
+      blackbox.virtualization.vm
     ]
     ++ [
-      den.aspects.displayManagers.sddm
-      den.aspects.desktops.plasma
-      den.aspects.blender
+      displayManagers.sddm
+      desktops.plasma
+      blackbox.blender
     ];
 
     nixos = {
