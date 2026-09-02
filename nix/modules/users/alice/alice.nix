@@ -34,6 +34,7 @@
       {
         home.packages =
           if host.hasDesktop then
+            with pkgs;
             [
               # System
               kdePackages.kdeconnect-kde
