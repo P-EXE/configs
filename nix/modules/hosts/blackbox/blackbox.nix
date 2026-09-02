@@ -1,7 +1,9 @@
 { den, lib, ... }: {
   # host aspect
   den.aspects.blackbox = {
-    includes = with den.aspects; [ ] ++ lib.attrValues den.aspects.blackbox._;
+    includes = with den.aspects.blackbox; [ 
+      ssh
+    ];
 
     nixos = {
       users.users.admin.initialHashedPassword = "admin";
