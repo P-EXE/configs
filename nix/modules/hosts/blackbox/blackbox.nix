@@ -1,7 +1,10 @@
 { den, lib, ... }: {
   # host aspect
   den.aspects.blackbox = {
-    includes = with den.aspects.blackbox; [ 
+    includes = with den.aspects.blackbox; [
+      hardware
+      firmware
+      software
       ssh
     ];
 
