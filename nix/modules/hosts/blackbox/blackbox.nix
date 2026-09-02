@@ -8,8 +8,8 @@
 
       den.aspects.blackbox.ssh
       den.aspects.blackbox.samba
-      den.aspects.blackbox.virtualisation.containers
-      den.aspects.blackbox.virtualisation.vm
+      den.aspects.blackbox.virtualization.containers
+      den.aspects.blackbox.virtualization.vm
     ]
     ++ [
       den.aspects.displayManagers.ssdm
