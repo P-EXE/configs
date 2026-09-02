@@ -12,7 +12,7 @@
       den.aspects.blackbox.virtualization.vm
     ]
     ++ [
-      den.aspects.displayManagers.ssdm
+      den.aspects.displayManagers.sddm
       den.aspects.desktops.plasma
       den.aspects.blender
     ];
