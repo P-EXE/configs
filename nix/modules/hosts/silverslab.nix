@@ -2,7 +2,7 @@
   den.aspects.silverslab = {
     includes = [
       den.aspects.displayManagers.tuigreet
-      den.aspects.desktop.hyprland
+      den.aspects.desktops.hyprland
       den.aspects.virtualization
       den.aspects.winapps
     ]

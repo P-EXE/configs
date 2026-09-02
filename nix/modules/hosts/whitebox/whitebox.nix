@@ -1,7 +1,7 @@
 { den, lib, inputs, ... }: {
   den.aspects.whitebox = {
     includes = [
-      den.aspects.desktop.hyprland
+      den.aspects.desktops.hyprland
       den.aspects.virtualization
       den.aspects.winapps
     ] ++ lib.attrValues den.aspects.whitebox._;
