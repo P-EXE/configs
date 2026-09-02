@@ -20,60 +20,65 @@
           den.batteries.primary-user
           (den.batteries.user-shell "fish")
         ];
-    homeManager = { pkgs, ... }: {
-      home.packages = with pkgs; [
-        # System
-        btop
-        pinentry-tty
-        kdePackages.kdeconnect-kde
-        rbw
-        nixfmt
-
-        # Desktop
-        spotify
-        obsidian
-        vesktop
-
-        # Graphics
-        #blender
-        #(blender.override {
-        #	config.cudaSupport=true;
-        #	config.rocmSupport=true;
-        #})
-        #cudaPackages.cuda_cudart # Test for blender-cuda
-        #cudaPackages.cudnn # Test for blender-cuda
-        freecad
-        inkscape
-        krita
-
-        # Gaming
-        retroarch
-        #rpcs3
-        pcsx2
-        ppsspp
-
-        # Audio
-        mixxx
-      ];
-      # Drives
-      services.udiskie.enable = true;
-      # Fonts
-      fonts.fontconfig = {
-        enable = true;
-        antialiasing = true;
-        hinting = "full";
-        subpixelRendering = "rgb";
-        defaultFonts.monospace = [
-          "JetBrains Mono"
+    homeManager =
+      { pkgs, ... }:
+      let
+        basePackages = with pkgs; [
+          btop
+          pinentry-tty
+          kdePackages.kdeconnect-kde
+          rbw
+          nixfmt
         ];
-        defaultFonts.sansSerif = [ ];
-        defaultFonts.serif = [ ];
+      in
+      {
+        home.packages =
+          if host.hasDesktop then
+            [
+              # System
+              kdePackages.kdeconnect-kde
+
+              # Desktop
+              spotify
+              obsidian
+              vesktop
+
+              # Graphics
+              freecad
+              inkscape
+              krita
+
+              # Gaming
+              retroarch
+              #rpcs3
+              pcsx2
+              ppsspp
+
+              # Audio
+              mixxx
+            ]
+            ++ basePackages
+          else
+            basePackages;
+        # Drives
+        services.udiskie.enable = true;
+        # Fonts
+        fonts.fontconfig = {
+          enable = true;
+          antialiasing = true;
+          hinting = "full";
+          subpixelRendering = "rgb";
+          defaultFonts.monospace = [
+            "JetBrains Mono"
+          ];
+          defaultFonts.sansSerif = [ ];
+          defaultFonts.serif = [ ];
+        };
+        # Nix
+        nixpkgs.config.allowUnfree = true;
+        # Home manager
+        home.stateVersion = "26.05";
       };
-      # Nix
-      nixpkgs.config.allowUnfree = true;
-      # Home manager
-      home.stateVersion = "26.05";
-    };
     provides.to-hosts.nixos = { pkgs, ... }: {
       nixpkgs.config.allowUnfree = true;
       # Fonts
