@@ -11,11 +11,11 @@
       nixos = { pkgs, ... }: {
         virtualisation = {
           docker = {
-            enable = true;
+            enable = false;
             storageDriver = "btrfs";
           };
           podman = {
-            enable = false;
+            enable = true;
             # Create a `docker` alias for podman, to use it as a drop-in replacement
             dockerCompat = false;
             # Required for containers under podman-compose to be able to talk to each other.
