@@ -8,17 +8,13 @@
       blackbox.ssh
       blackbox.samba
       blackbox.virtualization.containers
-      blackbox.virtualization.vm
+      #blackbox.virtualization.vm
     ]
     ++ [
       displayManagers.sddm
       desktops.plasma
       blackbox.blender
     ];
-
-    nixos = {
-      users.users.admin.initialHashedPassword = "admin";
-    };
 
     _.hardware.nixos =
       {
