@@ -1,0 +1,38 @@
+services:
+  mc:
+    image: itzg/minecraft-server:latest
+    restart: unless-stopped
+    container_name: mc-vanilla-latest
+    environment:
+      EULA: "true"
+      TYPE: FABRIC
+      VERSION: "LATEST"
+      DIFFICULTY: "easy"
+      MODE: "creative" # creative, survival, adventure, spectator
+      LEVEL: "world" # set the world for the server
+      
+      #RESOURCE_PACK: "" # set a custom resource pack
+      # VERSION: 1.21.4
+      # FABRIC_INSTALLER_VERSION: 1.0.1
+      # FABRIC_LOADER_VERSION: 0.16.10
+      # Since Fabric server type only includes the loader, most times
+      # the fabric-api is required for other mods to function
+      
+      MODRINTH_PROJECTS: |
+        fabric-api
+    tty: true
+    ports:
+      - "25565:25565"
+    labels:
+      - homepage.group=Gaming
+      - homepage.name=Minecraft
+      - homepage.icon=minecraft.svg
+      - homepage.href=blackbox.lab.p-exe.com:25565
+      - homepage.description=Minecraft server
+      - homepage.widget.type=minecraft
+      - homepage.widget.url=udp://blackbox.lab.p-exe.com:25565
+    volumes:
+      - fabric:/data
+
+volumes:
+  fabric: {}

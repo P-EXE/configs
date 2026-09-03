@@ -1,0 +1,43 @@
+services:
+  mc:
+    image: itzg/minecraft-server:latest
+    restart: unless-stopped
+    container_name: yuniverse-vanilla
+    environment:
+      EULA: "true"
+      TYPE: FABRIC
+      VERSION: "26.2"
+      DIFFICULTY: "easy"
+      MODE: "creative" # creative, survival, adventure, spectator
+      LEVEL: "world" # set the world for the server
+      LEVEL_TYPE: "minecraft:normal"
+      SEED: "6586346193942"
+      INIT_MEMORY: "1G"
+      MAX_MEMORY: "4G"
+      
+      #RESOURCE_PACK: "" # set a custom resource pack
+      # VERSION: 1.21.4
+      # FABRIC_INSTALLER_VERSION: 1.0.1
+      # FABRIC_LOADER_VERSION: 0.16.10
+      # Since Fabric server type only includes the loader, most times
+      # the fabric-api is required for other mods to function
+      
+      MODRINTH_PROJECTS: |
+        fabric-api
+        voxy-server-side
+        chunky
+    tty: true
+    ports:
+    - 25565:25565
+    labels:
+      - homepage.group=Gaming
+      - homepage.name=Minecraft
+      - homepage.icon=minecraft.svg
+      - homepage.href=yuniverse-vanilla.minecraft.blackbox.lab.p-exe.com:25565
+      - homepage.description=Minecraft server
+      - homepage.widget.type=minecraft
+      - homepage.widget.url=udp://yuniverse-vanilla.minecraft.blackbox.lab.p-exe.com:25565
+    volumes:
+      - fabric:/data
+volumes:
+  fabric: {}
