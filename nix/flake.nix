@@ -16,7 +16,7 @@
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
     helium = {
-      url = "github:P-EXE/helium";
+      url = "github:P-EXE/helix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {

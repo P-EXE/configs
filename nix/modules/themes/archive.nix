@@ -95,14 +95,14 @@
     	  height = "100%";
     	  border-width = 0;
     	  outline-width = 0;
-    	  padding-left = 32;
-    	  padding-top = 0;
-    	  result-spacing = builtins.floor (-32 * host.primaryDisplay.pseudoScale);
+    	  padding-left = 16;
+    	  padding-top = 64;
+    	  result-spacing = builtins.floor (-16 * host.primaryDisplay.pseudoScale);
     	  num-results = 0;
     	  font = "Helvetica Neue LT Pro Bold";
     	  #font-variations = "wght 100";
     	  #font-features = "ss08 on";
-    	  font-size = "${builtins.toString (128 * host.primaryDisplay.pseudoScale)}px";
+    	  font-size = "${builtins.toString (160 * host.primaryDisplay.pseudoScale)}px";
     	  text-color = uiColors.color1;
     	  background-color = uiColors.color0;
     	  selection-color = uiColors.color4;
@@ -368,7 +368,7 @@
       programs.kitty = {
 		    enable = true;
 		    settings = {
-		      font_size = builtins.toString (6 * host.primaryDisplay.pseudoScale);
+		      font_size = builtins.toString (8 * host.primaryDisplay.pseudoScale);
 		      font_family = uiFont + " Regular";
 		      cursor_shape = "beam";
 		      cursor_shape_unfocused = "unchanged";

@@ -38,11 +38,17 @@
             [
               # System
               kdePackages.kdeconnect-kde
+              bitwarden-desktop
 
               # Desktop
+              # Music
               spotify
+              # Notes
               obsidian
+              calibre
+              # Comms
               vesktop
+              signal-desktop
 
               # Graphics
               freecad

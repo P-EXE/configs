@@ -132,6 +132,8 @@
         networking.networkmanager.enable = true;
         networking.wireless.iwd.enable = false;
 
+        services.gnome.gnome-keyring.enable = true;
+
         services.printing.enable = true;
 
         time.timeZone = "Europe/Vienna";
