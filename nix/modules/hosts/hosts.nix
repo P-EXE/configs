@@ -3,9 +3,7 @@
 {
   # tux user at igloo host.
   den.hosts.x86_64-linux.silverslab = rec {
-    users.alice = {
-      wallpaperPath = "~/Pictures/Wallpapers/Clay Banks/Arizona/Wheat.jpg";
-    };
+    users.alice = { };
     displays = [
       {
         name = "eDP-1";
@@ -36,6 +34,10 @@
     primaryDisplay = builtins.elemAt displays 0;
     battery = { };
     hasDesktop = true;
+    nix.settings.trusted-users = [
+      "@wheel"
+      "alice"
+    ];
   };
   den.hosts.x86_64-linux.whitebox = rec {
     users.alice = {

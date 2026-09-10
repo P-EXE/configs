@@ -23,21 +23,21 @@
         # Blockdevices
         fileSystems = {
           "/" = {
-            device = "/dev/disk/by-uuid/72e459ad-ebf3-41ab-aaac-6a8ec243b4dc";
+            device = "/dev/disk/by-uuid/68a92924-227e-43ce-b00c-a3a1999812a7";
             fsType = "btrfs";
           };
           "/home" = {
-            device = "/dev/disk/by-uuid/72e459ad-ebf3-41ab-aaac-6a8ec243b4dc";
+            device = "/dev/disk/by-uuid/68a92924-227e-43ce-b00c-a3a1999812a7";
             fsType = "btrfs";
             options = [ "subvol=home" ];
           };
           "/nix" = {
-            device = "/dev/disk/by-uuid/72e459ad-ebf3-41ab-aaac-6a8ec243b4dc";
+            device = "/dev/disk/by-uuid/68a92924-227e-43ce-b00c-a3a1999812a7";
             fsType = "btrfs";
             options = [ "subvol=nix" ];
           };
           "/boot" = {
-            device = "/dev/disk/by-uuid/1FB6-02DC";
+            device = "/dev/disk/by-uuid/32EE-EB92";
             fsType = "vfat";
             options = [
               "fmask=0077"
@@ -127,13 +127,17 @@
         ...
       }:
       {
-        services.desktopManager.plasma6.enable = true;
+	users.users."default" = {
+    	  isNormalUser = true;
+    	  description = "default regular user";
+    	  extraGroups = [ "networkmanager" "wheel" ];
+    	  packages = with pkgs; [
+    	  ];
+  	};
 
+  	    services.desktopManager.gnome.enable = true;
+        services.gnome.gnome-keyring.enable = true;
         networking.networkmanager.enable = true;
-        networking.wireless.iwd.enable = false;
-
-        services.gnome.gnome-keyring.enable = false;
-
         services.printing.enable = true;
 
         time.timeZone = "Europe/Vienna";
@@ -159,15 +163,12 @@
           # !TODO Remove after finding a way to add it to the hyprland aspect
           substituters = [
             "https://nix-community.cachix.org"
-            "https://hyprland.cachix.org"
           ];
           trusted-substituters = [
             "https://nix-community.cachix.org"
-            "https://hyprland.cachix.org"
           ];
           trusted-public-keys = [
             "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-            "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
           ];
         };
         system.stateVersion = "26.05";

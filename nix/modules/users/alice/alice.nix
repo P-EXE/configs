@@ -83,8 +83,18 @@
         };
         # Nix
         nixpkgs.config.allowUnfree = true;
+        nix.settings = {
+          trusted-substituters = [
+            "https://nix-community.cachix.org"
+            "https://cache.nixos.org/"
+            "https://hydra.nixos.org/"
+          ];
+          trusted-public-keys = [
+            "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+          ];
+        };
         # Home manager
-        home.stateVersion = "26.05";
+        home.stateVersion = "26.11";
       };
     provides.to-hosts.nixos = { pkgs, ... }: {
       nixpkgs.config.allowUnfree = true;

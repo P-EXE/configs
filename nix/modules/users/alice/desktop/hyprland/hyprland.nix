@@ -1,4 +1,7 @@
-{ den, lib, ... }: {
+{ den, lib, inputs, ... }: {
+  flake-file = {
+    inputs.awww.url = "git+https://codeberg.org/LGFae/awww";
+  };
   den.aspects.alice._.desktop = {
     includes = lib.attrValues den.aspects.alice.desktop._;
     _.hyprland.homeManager =
@@ -73,12 +76,18 @@
             ];
           };
         };
+        services.awww = {
+          enable = true;
+          package = inputs.awww.packages.${pkgs.stdenv.hostPlatform.system}.awww;
+          extraArgs = [ ];
+        };
         programs = {
           waybar.enable = true;
           tofi.enable = true;
         };
         home.packages = [
           pkgs.hyprshot
+          pkgs.wallutils
         ];
       };
   };

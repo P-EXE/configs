@@ -4,9 +4,11 @@
   outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
 
   nixConfig = {
-    extra-substituters = [ "https://nix-community.cachix.org" ];
-    extra-trusted-public-keys = [
-      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+    trusted-public-keys = [ "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=" ];
+    trusted-substituters = [
+      "https://nix-community.cachix.org"
+      "https://cache.nixos.org/"
+      "https://hydra.nixos.org/"
     ];
   };
 
@@ -22,10 +24,6 @@
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
-    #helium = {
-    #  url = "github:P-EXE/helix";
-    #  inputs.nixpkgs.follows = "nixpkgs";
-    #};
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
