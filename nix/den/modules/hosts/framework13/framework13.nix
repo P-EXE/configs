@@ -37,6 +37,7 @@
       <displayManager/tuigreet>
       <desktop/hyprland>
       <virtualization>
+      <stm32>
       (den.lib.policy.when
         (
           { user, ... }:
@@ -63,6 +64,7 @@
       }:
       {
         imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
+
         # Locale
         time.timeZone = "Europe/Vienna";
         i18n.defaultLocale = "en_US.UTF-8";
@@ -119,6 +121,8 @@
           powerOnBoot = false;
         };
         services.blueman.enable = true;
+        # Printing
+        services.printing.enable = true;
 
         # Nix
         system.stateVersion = "26.05";
@@ -130,6 +134,7 @@
             zfs.broken = "warn"; # or "ignore"
           };
         };
+        boot.supportedFilesystems.zfs = lib.mkForce false;
 
         # Kernel
         boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -154,6 +159,8 @@
         hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
         # Filesystem
+        services.gvfs.enable = true;
+        services.udisks2.enable = true;
         fileSystems = {
           "/" = {
             device = "/dev/disk/by-uuid/9796a2e5-3939-4796-b25f-99d207a20fd2";
