@@ -115,6 +115,12 @@
         # Connectivity
         # Networking
         networking.networkmanager.enable = true;
+        networking.firewall.enable = false;
+        # networking.firewall.allowedTCPPorts = [ ... ];
+        # networking.firewall.allowedUDPPorts = [ ... ];
+        #networking.proxy.default = "http://user:password@proxy:port/";
+        #networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+        boot.kernel.sysctl."net.ipv4.ip_unprivileged_port_start" = 80;
         # Bluetooth
         hardware.bluetooth = {
           enable = true;
@@ -126,6 +132,7 @@
 
         # Nix
         system.stateVersion = "26.05";
+        nix.settings.experimental-features = [ "nix-command flakes" ];
         # (20261020) Added because:
         # Refusing to evaluate package 'zfs-kernel-2.4.4-7.3' because it has problems:
         # - broken: This package is broken

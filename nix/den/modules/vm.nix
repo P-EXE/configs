@@ -2,7 +2,7 @@
 # you can edit your config and launch the VM to test stuff
 # instead of having to reboot each time.
 { inputs, eg, ... }: let
-  hostName = "framework13";
+  hostName = "blackbox";
 in {
   den.aspects.${hostName}.includes = [
     eg.vm.gui

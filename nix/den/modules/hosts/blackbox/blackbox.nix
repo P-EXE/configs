@@ -85,5 +85,21 @@
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
   };
-  den.aspects.blackbox.hardware.nixos = {};
+  den.aspects.blackbox.hardware.nixos = {
+    boot.supportedFilesystems.zfs = lib.mkForce false;
+    fileSystems = {
+			"/" = { 
+				device = "/dev/disk/by-uuid/113f5886-46c0-48eb-8f79-4d77ae39ebf2";
+      	fsType = "ext4";
+    	};
+			"/boot" = {
+				device = "/dev/disk/by-uuid/3D68-D745";
+      	fsType = "vfat";
+      	options = [ "fmask=0077" "dmask=0077" ];
+    	};
+		};
+    swapDevices = [ ];
+
+  	nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+  };
 }
