@@ -56,6 +56,7 @@
     };
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
+    vscode-server.url = "github:nix-community/nixos-vscode-server";
     yazi.url = "github:sxyazi/yazi";
   };
 }

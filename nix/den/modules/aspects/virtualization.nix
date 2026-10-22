@@ -7,7 +7,7 @@
           containers.enable = true;
           docker = {
             enable = true;
-            storageDriver = "btrfs";
+            #storageDriver = "btrfs";
           };
           podman = {
             enable = true;
