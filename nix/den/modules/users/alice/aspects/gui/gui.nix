@@ -43,7 +43,7 @@
         pkgs.signal-desktop
         # Notes
         pkgs.obsidian
-        pkgs.calibre
+        #pkgs.calibre
         pkgs.libreoffice
         # Media
         #pkgs.spotify
