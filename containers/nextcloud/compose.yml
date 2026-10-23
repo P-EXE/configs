@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     command: --transaction-isolation=READ-COMMITTED --log-bin=ROW --skip-innodb-read-only-compressed
     volumes:
-      - /etc/containers/nextcloud/mysql-data:/var/lib/mysql
+      - ~/containers/nextcloud/mysql-data:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=P455w0rd!
       - MYSQL_PASSWORD=P455w0rd!
@@ -38,16 +38,22 @@ services:
       - MYSQL_PASSWORD=P455w0rd!
       - MYSQL_DATABASE=nextcloudDB
     volumes:
-      - /etc/containers/nextcloud/nextcloud-app:/var/www/html
+      - ~/containers/nextcloud/nextcloud-app:/var/www/html
     networks:
       - default
-      - traefik
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.nextcloud.rule=Host(`^nextcloud(\..+.\.local|\.local)$`)
-      - traefik.http.routers.nextcloud.entrypoints=web
-      - traefik.http.services.nextcloud.loadbalancer.server.port=80
-      - traefik.http.services.nextcloud.loadbalancer.passHostHeader=true
-networks:
-  traefik:
-    external: true
+
+    # Without traefik
+    ports:
+      - 8080:80
+
+    # With traefik
+    #  - traefik
+    #labels:
+    #  - traefik.enable=true
+    #  - traefik.http.routers.nextcloud.rule=Host(`^nextcloud(\..+.\.local|\.local)$`)
+    #  - traefik.http.routers.nextcloud.entrypoints=web
+    #  - traefik.http.services.nextcloud.loadbalancer.server.port=80
+    #  - traefik.http.services.nextcloud.loadbalancer.passHostHeader=true
+#networks:
+#  traefik:
+#    external: true

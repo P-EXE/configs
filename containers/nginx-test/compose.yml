@@ -6,7 +6,7 @@ services:
       - traefik
     labels:
       - traefik.enable=true
-      - traefik.http.routers.nginx-http.rule=Host(`nginx-test.blackbox.hyperv.localhost`)
+      - traefik.http.routers.nginx-http.rule=Host(`nginx-test.localhost`)
       - traefik.http.routers.nginx-http.entrypoints=web
     restart: unless-stopped
 

@@ -18,5 +18,5 @@ services:
       - 5900:5900/udp
     volumes:
       - ~/macos/storage:/storage
-    restart: always
+    restart: no
     stop_grace_period: 2m
