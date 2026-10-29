@@ -7,10 +7,51 @@
 {
   den.hosts.framework13-minimal = {
     system = "x86_64-linux";
+    users.alice = { };
     users.blank = { };
+    # TODO: This is apparently freeform, although a schema for this existsm, map how?
+    hasDesktop = true;
+    monitors = [
+      {
+        name = "eDP-1";
+        resolution.x = 2880;
+        resolution.y = 1920;
+        refreshRate = 120;
+        position.x = 0;
+        position.y = 1;
+        safeZones.tl.x = 0;
+        safeZones.tl.y = 0;
+        safeZones.tr.x = 0;
+        safeZones.tr.y = 0;
+        safeZones.br.x = 0;
+        safeZones.br.y = 0;
+        safeZones.bl.x = 0;
+        safeZones.bl.y = 0;
+        scale = 1.0;
+        pseudoScale = 2.0;
+        colorSpace = "srgb";
+      }
+    ];
   };
   den.aspects.framework13-minimal = {
     includes = [
+      <displayManager/tuigreet>
+      <desktop/hyprland>
+      (den.lib.policy.when
+        (
+          { user, ... }:
+          lib.hasAttrByPath [ user.name "gui" ] den.aspects
+        )
+        (
+          den.lib.policy.mkPolicy "incl-user-gui-pkgs" (
+            { user, ... }: [
+              (den.lib.policy.include [
+                den.aspects.${user.name}.gui
+              ])
+            ]
+          )
+        )
+      )
     ];
 
     nixos =

@@ -35,23 +35,8 @@
   den.aspects.framework13 = {
     includes = [
       <displayManager/tuigreet>
-      <desktop/hyprland>
-      <virtualization>
-      (den.lib.policy.when
-        (
-          { user, ... }:
-          lib.hasAttrByPath [ user.name "gui" ] den.aspects
-        )
-        (
-          den.lib.policy.mkPolicy "gui-package-user" (
-            { user, ... }: [
-              (den.lib.policy.include [
-                den.aspects.${user.name}.gui
-              ])
-            ]
-          )
-        )
-      )
+      #<desktop/hyprland>
+      #<virtualization>
     ]
     ++ lib.attrValues den.aspects.framework13._;
     nixos =
@@ -135,18 +120,18 @@
         # Printing
         services.printing.enable = true;
 
-        # Nix
+        # Nix & NixOS
         system.stateVersion = "26.05";
         nix.settings.experimental-features = [ "nix-command flakes" ];
         # (20261020) Added because:
         # Refusing to evaluate package 'zfs-kernel-2.4.4-7.3' because it has problems:
         # - broken: This package is broken
-        nixpkgs.config = {
-          problems.handlers = {
-            zfs.broken = "warn"; # or "ignore"
-          };
-        };
-        boot.supportedFilesystems.zfs = lib.mkForce false;
+        #nixpkgs.config = {
+        #  problems.handlers = {
+        #    zfs.broken = "warn"; # or "ignore"
+        #  };
+        #};
+        #boot.supportedFilesystems.zfs = lib.mkForce false;
 
         # Kernel
         boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -162,9 +147,16 @@
         boot.extraModulePackages = [ ];
 
         # Bootloader
-        boot.loader.systemd-boot.enable = true;
-        boot.loader.efi.canTouchEfiVariables = true;
-        boot.zfs.forceImportRoot = false; # It is highly recommended to set it to `false`, the new default from 26.11 on, to reduce the risk of data loss. Alternatively, you can silence this warning by explicitly setting it to `true`.
+        #boot.loader.systemd-boot.enable = true;
+        #boot.loader.efi.canTouchEfiVariables = true;
+        boot.loader = {
+          grub = {
+            enable = true;
+            device = "nodev"; # "nodev" is used for UEFI
+            efiSupport = true;
+          };
+          efi.canTouchEfiVariables = true;
+        };
 
         # Architecture
         nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
