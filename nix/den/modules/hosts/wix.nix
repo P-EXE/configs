@@ -34,7 +34,6 @@
       <displayManager/tuigreet>
       <desktop/hyprland>
       <virtualization>
-      <stm32>
       (den.lib.policy.when
         (
           { user, ... }:

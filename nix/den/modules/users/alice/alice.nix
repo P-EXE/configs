@@ -23,6 +23,15 @@
     nixos = { pkgs, ... }: {
       nixpkgs.config.allowUnfree = true;
       users.users.alice.initialPassword = "1";
+
+      networking.networkmanager = {
+        plugins = with pkgs; [
+          networkmanager-openvpn
+        ];
+      };
+      #services.openvpn.servers = {
+      #  fhtw  = { config = '' config /home/alice/.config/openvpn/FHTW-students.ovpn''; };
+      #};
     };
     homeManager = { pkgs, ... }: {
       nixpkgs.config.allowUnfree = true;
@@ -42,6 +51,8 @@
       home.packages = with pkgs; [
         nix-index
         nixfmt
+
+        fetch
       ];
     };
   };

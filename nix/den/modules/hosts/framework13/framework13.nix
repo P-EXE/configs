@@ -37,7 +37,6 @@
       <displayManager/tuigreet>
       <desktop/hyprland>
       <virtualization>
-      <stm32>
       (den.lib.policy.when
         (
           { user, ... }:
@@ -120,6 +119,12 @@
         # networking.firewall.allowedUDPPorts = [ ... ];
         #networking.proxy.default = "http://user:password@proxy:port/";
         #networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+        programs.wireshark = {
+          enable = true;
+          package = pkgs.wireshark-cli;
+          dumpcap.enable = true;
+          usbmon.enable = true;
+        };
         boot.kernel.sysctl."net.ipv4.ip_unprivileged_port_start" = 80;
         # Bluetooth
         hardware.bluetooth = {
